@@ -13,8 +13,7 @@ public class StopMoveSystem : IEcsRunSystem
             if (model.Transform.position.y < -7)
             {
                 ref EcsEntity entity = ref _filter.GetEntity(i);
-                entity.Del<MoveableComponent>();
-                entity.Get<MoveStoppedEvent>();
+                entity.Get<MoveTaboo>();
             }
         }
     }

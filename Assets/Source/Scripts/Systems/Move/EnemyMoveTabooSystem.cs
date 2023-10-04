@@ -1,8 +1,8 @@
 ﻿using Leopotam.Ecs;
 
-public class EnemyMoveStoppedHandlerSystem : IEcsRunSystem
+public class EnemyMoveTabooSystem : IEcsRunSystem
 {
-    private EcsFilter<MoveStoppedEvent, EnemyTag> _filter;
+    private EcsFilter<MoveTaboo, EnemyTag> _filter;
 
     public void Run()
     {
@@ -10,7 +10,9 @@ public class EnemyMoveStoppedHandlerSystem : IEcsRunSystem
         {
             ref EnemyTag tag = ref _filter.Get2(i);
             ref EcsEntity entity = ref _filter.GetEntity(i);
-            
+
+            entity.Del<MoveTaboo>();
+
             tag.EnemyBase.ReturnEnemyInPool();
             entity.Destroy();
         }

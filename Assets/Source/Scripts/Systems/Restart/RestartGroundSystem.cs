@@ -1,5 +1,4 @@
 ﻿using Leopotam.Ecs;
-using UnityEngine;
 
 public class RestartGroundSystem : IEcsRunSystem
 {
@@ -11,12 +10,9 @@ public class RestartGroundSystem : IEcsRunSystem
         foreach (int i in _filter)
         {
             ref EcsEntity entity = ref _filter.GetEntity(i);
-            ref GroundTag groundTag = ref _filter.Get2(i);
             ref ModelComponent model = ref _filter.Get3(i);
 
-            MoveableComponent moveable = new MoveableComponent(Vector2.down, _levelConfig.Speed);
-
-            entity.Replace(moveable);
+            entity.Del<MoveTaboo>();
             model.Transform.position = _levelConfig.StartGroundPosition;
         }
     }

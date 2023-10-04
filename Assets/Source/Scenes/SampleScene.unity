@@ -170,7 +170,7 @@ MonoBehaviour:
   _balloonConfig: {fileID: 11400000, guid: 3bb56374988dddd4cadb83d8853faedd, type: 2}
   _userInputConfig: {fileID: 11400000, guid: de93946683f0fa54fbcc1a25d5797f0e, type: 2}
   _levelConfig: {fileID: 11400000, guid: 54cb494fcfabbff4ca21bd35b87660ae, type: 2}
-  _enemiesConfig: {fileID: 11400000, guid: 08b9dea892ba37241bad5916cba6c8b4, type: 2}
+  _enemyFactory: {fileID: 1357760515}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,6 +254,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1357760514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1357760516}
+  - component: {fileID: 1357760515}
+  m_Layer: 0
+  m_Name: EnemyFactory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1357760515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357760514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fdd565085753bc43945e79f886def15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemiesConfig: {fileID: 11400000, guid: 08b9dea892ba37241bad5916cba6c8b4, type: 2}
+--- !u!4 &1357760516
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357760514}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.117054924, y: -0.4227632, z: -0.1555031}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1507539757
 GameObject:

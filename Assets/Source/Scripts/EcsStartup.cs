@@ -6,7 +6,7 @@ public class EcsStartup : MonoBehaviour
     [SerializeField] private BalloonConfig _balloonConfig;
     [SerializeField] private UserInputConfig _userInputConfig;
     [SerializeField] private LevelConfig _levelConfig;
-    [SerializeField] private EnemiesConfig _enemiesConfig;
+    [SerializeField] private EnemyFactory _enemyFactory;
 
     private EcsWorld _ecsWorld;
     private EcsSystems _systems;
@@ -28,7 +28,7 @@ public class EcsStartup : MonoBehaviour
            .Inject(_userInputConfig)
            .Inject(_balloonConfig)
            .Inject(_levelConfig)
-           .Inject(_enemiesConfig);
+           .Inject(_enemyFactory);
     }
 
     private void OneFrames()
@@ -36,7 +36,6 @@ public class EcsStartup : MonoBehaviour
         _systems
             .OneFrame<ChangeLineCommand>()
             .OneFrame<LineChangedEvent>()
-            .OneFrame<MoveStoppedEvent>()
             .OneFrame<RestartEvent>()
             .OneFrame<PausedEvent>();
     }
@@ -57,7 +56,7 @@ public class EcsStartup : MonoBehaviour
             .Add(new MoveSystem())
             .Add(new SpawnEnemiesSystem())
             .Add(new StopMoveSystem())
-            .Add(new EnemyMoveStoppedHandlerSystem())
+            .Add(new EnemyMoveTabooSystem())
             .Add(new RestartEnemiesSystem())
             .Add(new RestartGroundSystem())
             .Add(new ChangeColorSystem())

@@ -1,3 +1,1 @@
-﻿internal struct PlayerTag
-{
-}
+﻿internal struct PlayerTag { }

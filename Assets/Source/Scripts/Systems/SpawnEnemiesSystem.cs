@@ -7,7 +7,8 @@ public class SpawnEnemiesSystem : IEcsInitSystem, IEcsRunSystem
 {
     private EcsWorld _ecsWorld;
     private LevelConfig _levelConfig;
-    private EnemiesConfig _enemiesConfig;
+    private EnemyFactory _enemyFactory;
+
     private EcsFilter<Paused, PlayerTag> _pauseFilter;
     private EcsFilter<RestartEvent, PlayerTag> _restartFilter;
 
@@ -17,7 +18,7 @@ public class SpawnEnemiesSystem : IEcsInitSystem, IEcsRunSystem
 
     public void Init()
     {
-        _enemiesPool = new Pool<EnemyBase, EnemyType>(SpawnEnemy);
+        _enemiesPool = new Pool<EnemyBase, EnemyType>(_enemyFactory.SpawnEnemy<EnemyBase>);
         StartSpawnEnemies();
     }
 
@@ -64,15 +65,6 @@ public class SpawnEnemiesSystem : IEcsInitSystem, IEcsRunSystem
     private Vector2 GetStartPosition(LineType lineType)
     {
         return new Vector2(_levelConfig.LineXPositionInTypePair[lineType], 6);
-    }
-
-    private EnemyBase SpawnEnemy(EnemyType type)
-    {
-        EnemyBase enemyPrefab = _enemiesConfig.EnemyBaseInTypePairs[type];
-       
-        EnemyBase enemyBase = UnityEngine.Object.Instantiate(enemyPrefab,
-            Vector2.zero, Quaternion.identity);
-        return enemyBase;
     }
 
     public void Run()
