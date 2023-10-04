@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using Leopotam.Ecs;
 
-public class ChangeColorSystem : IEcsRunSystem
+public class ChangeColorHandlerSystem : IEcsRunSystem
 {
     private EcsFilter<ColorChangeCommand, RenderedComponent> _filter;
     private EcsFilter<ChangingColorComponent, Paused> _pausedFilter;

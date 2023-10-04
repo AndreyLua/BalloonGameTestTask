@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dff63bf5ccbcc914aa3c6c524572622f, type: 3}
   m_Name: LevelConfig
   m_EditorClassIdentifier: 
-  Background: {fileID: 2934002382021866087, guid: 4a2763473416466479b74a4c9f55ab2b, type: 3}
-  GroundPrefab: {fileID: 4491704404739304399, guid: 55b40638790c2254ca50d04eea2615b5, type: 3}
+  BackgroundPrefab: {fileID: 2934002382021866087, guid: 4a2763473416466479b74a4c9f55ab2b, type: 3}
+  StartBackgroundColor: {r: 0.6862745, g: 0.86274517, b: 0.9960785, a: 1}
+  FinalBackgroundColor: {r: 0.027450982, g: 0.007843138, b: 0.19607845, a: 1}
   StartBackgroundPosition: {x: 0, y: 2}
+  GroundPrefab: {fileID: 4491704404739304399, guid: 55b40638790c2254ca50d04eea2615b5, type: 3}
   StartGroundPosition: {x: 0.3248006, y: -0.0681748}
   Speed: 2
   TimeToSpawnEnemy: 5
