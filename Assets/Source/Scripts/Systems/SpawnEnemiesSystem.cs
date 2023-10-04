@@ -27,27 +27,50 @@ public class SpawnEnemiesSystem : IEcsInitSystem, IEcsRunSystem
         _spawnSequence = DOTween.Sequence().AppendInterval(_levelConfig.TimeToSpawnEnemy).AppendCallback(() =>
         {
             EnemyBase enemy = _enemiesPool.ExtractElement(EnemyType.Common);
-            enemy.gameObject.SetActive(true);
 
-            EcsEntity enemyEntity = _ecsWorld.NewEntity();
-
-            ModelComponent model = new ModelComponent(enemy.transform);
-            LineComponent line = new LineComponent(LineType.Left);
-            MoveableComponent moveable = new MoveableComponent(Vector2.down, _levelConfig.Speed);
-            EnemyTag tag = new EnemyTag(enemy);
-            
             LineType lineType = GetRandomLineType();
-            line.LineType = lineType;
-            model.Transform.position = GetStartPosition(lineType);
 
-            enemyEntity.Replace(model)
-            .Replace(line)
-            .Replace(moveable)
-            .Replace(tag);
-
+            if (enemy.Entity.IsNull())
+                SpawnEntity(enemy, lineType);
+            else
+                InitEntityInPool(enemy, lineType);
+            
             StartSpawnEnemies();
         });
     }
+
+    private void SpawnEntity(EnemyBase enemy, LineType lineType)
+    {
+        EcsEntity enemyEntity = _ecsWorld.NewEntity();
+        InitNewEnemyEntity(ref enemyEntity, enemy, lineType);
+        enemy.Init(enemyEntity);
+    }
+
+    private void InitEntityInPool(EnemyBase enemy, LineType lineType)
+    {
+        enemy.gameObject.SetActive(true);
+        ref ModelComponent model = ref enemy.Entity.Get<ModelComponent>();
+
+        model.Transform.position = GetStartPosition(lineType);
+
+        enemy.Entity.Del<InPool>();
+        enemy.Entity.Del<MoveTaboo>();
+    }
+
+    private void InitNewEnemyEntity(ref EcsEntity entity, EnemyBase enemy, LineType lineType)
+    {
+        ModelComponent model = new ModelComponent(enemy.transform);
+        LineComponent line = new LineComponent(lineType);
+        MoveableComponent moveable = new MoveableComponent(Vector2.down, _levelConfig.Speed);
+        EnemyTag tag = new EnemyTag(enemy);
+
+        model.Transform.position = GetStartPosition(line.LineType);
+
+        entity.Replace(model)
+               .Replace(moveable)
+               .Replace(tag);
+    }
+
 
     private void StopSpawnEnemies()
     {

@@ -11,10 +11,8 @@ public class EnemyMoveTabooSystem : IEcsRunSystem
             ref EnemyTag tag = ref _filter.Get2(i);
             ref EcsEntity entity = ref _filter.GetEntity(i);
 
-            entity.Del<MoveTaboo>();
-
+            entity.Get<InPool>();
             tag.EnemyBase.ReturnEnemyInPool();
-            entity.Destroy();
         }
     }
 }

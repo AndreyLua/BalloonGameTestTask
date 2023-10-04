@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Leopotam.Ecs;
+using System;
 using UnityEngine;
 
-public abstract class EnemyBase : MonoBehaviour, IPoolable<EnemyBase, EnemyType>
+public abstract class EnemyBase : EntityReference, IPoolable<EnemyBase, EnemyType>
 {
     public abstract SpriteRenderer SpriteRenderer { get; }
 
+    public abstract EcsEntity Entity { get; }
     public abstract EnemyType Identifier { get; }
 
     public event Action<EnemyBase> ElementReturnEvent;

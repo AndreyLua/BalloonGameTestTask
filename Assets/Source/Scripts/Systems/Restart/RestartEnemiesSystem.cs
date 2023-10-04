@@ -1,5 +1,4 @@
 ﻿using Leopotam.Ecs;
-using UnityEngine;
 
 public class RestartEnemiesSystem : IEcsRunSystem
 {
@@ -12,7 +11,8 @@ public class RestartEnemiesSystem : IEcsRunSystem
             ref EcsEntity entity = ref _filter.GetEntity(i);
             ref EnemyTag enemyTag = ref _filter.Get2(i);
             enemyTag.EnemyBase.ReturnEnemyInPool();
-            entity.Destroy();
+            entity.Get<InPool>();
+            entity.Get<MoveTaboo>();
         }
     }
 }
